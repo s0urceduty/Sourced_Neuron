@@ -9,7 +9,7 @@ Beyond individual neuron simulation, Sourced Neuron emphasizes network-level int
 Functions:
 --------------
 
-# SERIES 1: CORE LIFECYCLE & INITIALIZATION
+#### SERIES 1: CORE LIFECYCLE & INITIALIZATION
 1.  `InitNeu(params)`: This function initializes neuron state variables and core parameters.
 2.  `SetWeight(w)`: Configures the initial synaptic weight values for incoming signals.
 3.  `SetBias(b)`: Establishes the threshold offset for the neuron's firing activation.
@@ -25,7 +25,7 @@ Functions:
 13. `Shutdown()`: Safely closes all data streams and saves the final state.
 14. `MainLoop()`: The master function that orchestrates all sub-processes.
 
-# SERIES 2: SIGNAL PROCESSING & MATHEMATICS
+#### SERIES 2: SIGNAL PROCESSING & MATHEMATICS
 15. `ProcInput(data)`: The primary function for receiving and scaling raw input vectors.
 16. `SumSignals()`: Performs the weighted summation of all current dendritic inputs.
 17. `FireImpulse()`: Executes the output transmission if the internal threshold is met.
@@ -37,7 +37,7 @@ Functions:
 23. `PulseSync()`: Aligns the firing cycle with a global system clock.
 24. `ParallelSum()`: Uses multi-threading to speed up input summation.
 
-# SERIES 3: ACTIVATION FUNCTIONS (NON-LINEARITY)
+#### SERIES 3: ACTIVATION FUNCTIONS (NON-LINEARITY)
 25. `ActReLU(x)`: Applies the Rectified Linear Unit activation to introduce non-linearity.
 26. `ActSigmoid(x)`: Normalizes the output signal between a range of 0 and 1.
 27. `ActTanh(x)`: Maps inputs to a range between -1 and 1 for zero-centered data.
@@ -51,7 +51,7 @@ Functions:
 35. `SoftPlus(x)`: A smooth approximation of the ReLU function.
 36. `MishAct(x)`: A self-regularized non-monotonic activation function.
 
-# SERIES 4: LEARNING & OPTIMIZATION
+#### SERIES 4: LEARNING & OPTIMIZATION
 37. `CalcError(tar)`: Measures the difference between the current output and target value.
 38. `BackProp(err)`: Calculates the gradient of the loss function regarding weights.
 39. `UpdWeight(lr)`: Adjusts internal weights based on the calculated gradient and learning rate.
@@ -70,7 +70,7 @@ Functions:
 52. `SetTarget(t)`: Defines the ground-truth value for supervised learning.
 53. `BatchSize(n)`: Sets how many inputs are processed before a weight update.
 
-# SERIES 5: TOPOLOGY & CONNECTIVITY
+#### SERIES 5: TOPOLOGY & CONNECTIVITY
 54. `SynapsePrune()`: Removes low-weight connections to optimize network efficiency.
 55. `Inhibit(n2)`: Logic for one neuron to actively suppress the firing of another.
 56. `Excite(n2)`: Logic for increasing the membrane potential of a target neuron.
@@ -82,7 +82,7 @@ Functions:
 62. `DistanceTo(n)`: Calculates the Euclidean distance to another neuron.
 63. `PruneOrphan()`: Automatically deletes the neuron if it has no connections.
 
-# SERIES 6: VALIDATION & METRICS
+#### SERIES 6: VALIDATION & METRICS
 64. `CheckNaN()`: Scans for "Not a Number" errors in the weight or output matrices.
 65. `CheckLimit()`: Ensures weights do not exceed pre-defined safety boundaries.
 66. `PeakVoltage()`: Records the highest potential reached during a cycle.
@@ -96,7 +96,7 @@ Functions:
 74. `VerifyArch()`: Cross-references current params against the master architecture.
 75. `CheckDep()`: Verifies that required libraries like NumPy are installed.
 
-# SERIES 7: DATA PERSISTENCE & I/O
+#### SERIES 7: DATA PERSISTENCE & I/O
 76. `SaveModel(path)`: Serializes the current neuron parameters to a file.
 77. `LoadModel(path)`: Restores weights and biases from a saved configuration file.
 78. `LogActivity()`: Records firing history and internal states for debugging.
@@ -108,7 +108,7 @@ Functions:
 84. `ImportCSV()`: Loads a weight matrix from a standard CSV file.
 85. `TracePath()`: Follows the signal flow through the neuron for auditing.
 
-# SERIES 8: PERFORMANCE & HARDWARE
+#### SERIES 8: PERFORMANCE & HARDWARE
 86. `DropOut(p)`: Randomly deactivates the neuron during training to prevent overfitting.
 87. `NormBatch()`: Standardizes the inputs across a batch to accelerate training.
 88. `PlotNeuron()`: Generates a visual representation of the neuron's current behavior.
