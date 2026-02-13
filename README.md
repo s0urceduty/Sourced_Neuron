@@ -9,56 +9,121 @@ Beyond individual neuron simulation, Sourced Neuron emphasizes network-level int
 Functions:
 --------------
 
+# SERIES 1: CORE LIFECYCLE & INITIALIZATION
 1.  `InitNeu(params)`: This function initializes neuron state variables and core parameters.
-2.  `UpdVolt(state)`: This function updates membrane potential dynamics.
-3.  `IonDyn(state)`: This function simulates ion channel conductance behavior.
-4.  `UpdWgt(weights)`: This function modifies synaptic weights.
-5.  `DetSpike(state)`: This function detects spike threshold crossings.
-6.  `RstSpike(state)`: This function resets membrane potential after a spike.
-7.  `LeakCur(voltage)`: This function computes passive leak current.
-8.  `NaCur(voltage)`: This function calculates sodium current flow.
-9.  `KCur(voltage)`: This function calculates potassium current flow.
-10. `CaCur(voltage)`: This function calculates calcium current flow.
-11. `UpdGate(vars)`: This function integrates gating variable kinetics.
-12. `StepSim(state)`: This function advances the simulation by one timestep.
-13. `PoisIn(rate)`: This function generates Poisson-distributed spike input.
-14. `SynDel(spikes)`: This function applies synaptic transmission delays.
-15. `SynCur(weights)`: This function computes synaptic current.
-16. `HebbUpd(activity)`: This function applies Hebbian plasticity updates.
-17. `StdpUpd(timing)`: This function performs spike-timing-dependent plasticity.
-18. `HomeoScale(weights)`: This function applies homeostatic synaptic scaling.
-19. `FireRate(spikes)`: This function calculates firing rate over time.
-20. `BurstDet(spikes)`: This function detects bursting patterns.
-21. `ISIComp(spikes)`: This function computes interspike intervals.
-22. `RefracDyn(state)`: This function enforces refractory period dynamics.
-23. `InjCur(state)`: This function injects external current stimulus.
-24. `BuildNet(topology)`: This function constructs a neural network structure.
-25. `NetStep(network)`: This function simulates one network activity step.
-26. `ConnMat(nodes)`: This function generates a connectivity matrix.
-27. `NoiseAdd(state)`: This function adds stochastic membrane noise.
-28. `LfpEst(network)`: This function estimates local field potential signals.
-29. `PhaseSync(spikes)`: This function measures phase synchronization.
-30. `OscDet(signal)`: This function detects oscillatory activity bands.
-31. `EnergyUse(state)`: This function estimates metabolic energy consumption.
-32. `FitModel(data)`: This function optimizes model parameters to fit data.
-33. `ParamSweep(ranges)`: This function performs parameter space exploration.
-34. `SensAnal(model)`: This function evaluates parameter sensitivity.
-35. `AdaptDT(state)`: This function adjusts timestep dynamically.
-36. `SaveSim(data)`: This function stores simulation results.
-37. `LoadSim(file)`: This function loads stored simulation data.
-38. `PlotVolt(trace)`: This function visualizes membrane voltage traces.
-39. `PlotRaster(spikes)`: This function generates raster plots.
-40. `TransFunc(signal)`: This function computes neuron transfer function.
-41. `Entropy(spikes)`: This function estimates spike train entropy.
-42. `CritDetect(network)`: This function identifies critical network dynamics.
-43. `AttrState(network)`: This function analyzes attractor states.
-44. `MultiComp(geometry)`: This function simulates multi-compartment neurons.
-45. `DendInteg(inputs)`: This function models dendritic integration.
-46. `AxonProp(spike)`: This function simulates axonal spike propagation.
-47. `GliaLink(state)`: This function models neuron–glia coupling.
-48. `NtRelease(spike)`: This function simulates neurotransmitter release.
-49. `PlastStable(weights)`: This function assesses plasticity stability.
-50. `ExportJSON(model)`: This function exports model configuration to JSON.
+2.  `SetWeight(w)`: Configures the initial synaptic weight values for incoming signals.
+3.  `SetBias(b)`: Establishes the threshold offset for the neuron's firing activation.
+4.  `GetState()`: Retrieves the current electrochemical or mathematical state of the unit.
+5.  `ResetNeu()`: Clears all temporal data and returns the neuron to a resting state.
+6.  `InitXavier()`: Implements Xavier Initialization to keep signal variance consistent.
+7.  `InitHe()`: Specifically scales weights for neurons using ReLU-based activations.
+8.  `CopyNeu()`: Creates a deep copy of the neuron for genetic algorithms.
+9.  `SetID(name)`: Assigns a unique identifier to the neuron for tracking.
+10. `CheckHealth()`: Validates that all internal pointers and arrays are intact.
+11. `CloneState()`: Transfers the current potential and state to a new instance.
+12. `Version()`: Returns the current build version of the Sourced_Neuron lib.
+13. `Shutdown()`: Safely closes all data streams and saves the final state.
+14. `MainLoop()`: The master function that orchestrates all sub-processes.
+
+# SERIES 2: SIGNAL PROCESSING & MATHEMATICS
+15. `ProcInput(data)`: The primary function for receiving and scaling raw input vectors.
+16. `SumSignals()`: Performs the weighted summation of all current dendritic inputs.
+17. `FireImpulse()`: Executes the output transmission if the internal threshold is met.
+18. `Integrate(dt)`: Performs temporal integration for continuous-time simulations.
+19. `Leakage(rate)`: Simulates the natural decay of potential in a resting neuron.
+20. `SynapticDelay()`: Introduces a time lag between input reception and summation.
+21. `ScaleInput(s)`: Multiplies all incoming signals by a constant scaling factor.
+22. `BiasShift(s)`: Shifts the activation function along the x-axis.
+23. `PulseSync()`: Aligns the firing cycle with a global system clock.
+24. `ParallelSum()`: Uses multi-threading to speed up input summation.
+
+# SERIES 3: ACTIVATION FUNCTIONS (NON-LINEARITY)
+25. `ActReLU(x)`: Applies the Rectified Linear Unit activation to introduce non-linearity.
+26. `ActSigmoid(x)`: Normalizes the output signal between a range of 0 and 1.
+27. `ActTanh(x)`: Maps inputs to a range between -1 and 1 for zero-centered data.
+28. `ActSoftmax(v)`: Converts a vector of values into a probability distribution.
+29. `ActLeaky(x, a)`: A modified ReLU that prevents "dying neurons" by allowing a small gradient.
+30. `ActELU(x, a)`: Exponential Linear Unit for faster learning and better noise handling.
+31. `ActSwish(x)`: A self-gated activation function optimized for deep architectures.
+32. `PulseWidth(t)`: Modulates the duration of an impulse in spiking neuron models.
+33. `StepFunc()`: A binary activation function for simple logic-gate simulations.
+34. `LinearFunc()`: Passes the input directly to output without transformation.
+35. `SoftPlus(x)`: A smooth approximation of the ReLU function.
+36. `MishAct(x)`: A self-regularized non-monotonic activation function.
+
+# SERIES 4: LEARNING & OPTIMIZATION
+37. `CalcError(tar)`: Measures the difference between the current output and target value.
+38. `BackProp(err)`: Calculates the gradient of the loss function regarding weights.
+39. `UpdWeight(lr)`: Adjusts internal weights based on the calculated gradient and learning rate.
+40. `UpdBias(lr)`: Updates the bias parameter to refine the firing threshold over time.
+41. `SetLR(rate)`: Dynamically adjusts the learning rate parameter for the optimizer.
+42. `DecayLR(step)`: Reduces the learning rate over time to converge on a global minimum.
+43. `ClipGrad(val)`: Prevents "exploding gradients" by capping the maximum gradient value.
+44. `L1Reg(lambda)`: Adds Lasso regularization to encourage sparse weight matrices.
+45. `L2Reg(lambda)`: Adds Ridge regularization to prevent excessively large weights.
+46. `MomUpdate(v)`: Applies momentum to weight updates to bypass local minima.
+47. `AdamOpt()`: Implements the Adam Optimization logic.
+48. `RMSProp()`: Normalizes the gradient using a moving average of squared gradients.
+49. `AdaGrad()`: Adjusts learning rates based on the frequency of parameter updates.
+50. `GetGrads()`: Exports the current gradient values for external analysis.
+51. `ResetGrads()`: Zeroes out gradients before a new training iteration.
+52. `SetTarget(t)`: Defines the ground-truth value for supervised learning.
+53. `BatchSize(n)`: Sets how many inputs are processed before a weight update.
+
+# SERIES 5: TOPOLOGY & CONNECTIVITY
+54. `SynapsePrune()`: Removes low-weight connections to optimize network efficiency.
+55. `Inhibit(n2)`: Logic for one neuron to actively suppress the firing of another.
+56. `Excite(n2)`: Logic for increasing the membrane potential of a target neuron.
+57. `GetLayer()`: Returns the index of the layer this neuron belongs to.
+58. `BindTo(peer)`: Establishes a permanent synaptic link to a specific peer neuron.
+59. `Unbind(peer)`: Severs the link between the neuron and a peer unit.
+60. `GetSynCount()`: Returns the total number of active synaptic connections.
+61. `MapTopology()`: Returns the spatial coordinates of the neuron in a 3D grid.
+62. `DistanceTo(n)`: Calculates the Euclidean distance to another neuron.
+63. `PruneOrphan()`: Automatically deletes the neuron if it has no connections.
+
+# SERIES 6: VALIDATION & METRICS
+64. `CheckNaN()`: Scans for "Not a Number" errors in the weight or output matrices.
+65. `CheckLimit()`: Ensures weights do not exceed pre-defined safety boundaries.
+66. `PeakVoltage()`: Records the highest potential reached during a cycle.
+67. `FreqCheck()`: Calculates the firing frequency over a set time window.
+68. `LogLoss()`: Calculates the logarithmic loss for classification tasks.
+69. `MSELoss()`: Computes the Mean Squared Error for regression tasks.
+70. `HuberLoss()`: Applies a loss function that is less sensitive to outliers.
+71. `SetMaxWeight()`: Clips weights to a specific maximum absolute value.
+72. `SetMinWeight()`: Sets a floor for weights to prevent dead connections.
+73. `IsSaturated()`: Detects if the neuron is stuck at the limits of its activation.
+74. `VerifyArch()`: Cross-references current params against the master architecture.
+75. `CheckDep()`: Verifies that required libraries like NumPy are installed.
+
+# SERIES 7: DATA PERSISTENCE & I/O
+76. `SaveModel(path)`: Serializes the current neuron parameters to a file.
+77. `LoadModel(path)`: Restores weights and biases from a saved configuration file.
+78. `LogActivity()`: Records firing history and internal states for debugging.
+79. `StreamIn()`: Opens a data buffer for real-time sensor or stream input.
+80. `FlushQueue()`: Clears the input buffer to prevent data overflow.
+81. `WatchWeight()`: Attaches a listener to detect sudden changes in weight values.
+82. `LatentState()`: Accesses hidden variables not exposed to the output layer.
+83. `ExportJSON()`: Formats neuron data into a JSON string for web usage.
+84. `ImportCSV()`: Loads a weight matrix from a standard CSV file.
+85. `TracePath()`: Follows the signal flow through the neuron for auditing.
+
+# SERIES 8: PERFORMANCE & HARDWARE
+86. `DropOut(p)`: Randomly deactivates the neuron during training to prevent overfitting.
+87. `NormBatch()`: Standardizes the inputs across a batch to accelerate training.
+88. `PlotNeuron()`: Generates a visual representation of the neuron's current behavior.
+89. `Refractory(p)`: Implements a "cool-down" period where the neuron cannot fire.
+90. `SetPrecision()`: Toggles between float32 and float16 for memory optimization.
+91. `MutateWeight()`: Introduces random noise into weights for evolutionary testing.
+92. `Crossover(n2)`: Blends parameters with another neuron to create a "child" unit.
+93. `IsFiring()`: Boolean check to see if the neuron is currently in an active state.
+94. `HeatMap()`: Outputs a matrix of synaptic strengths for visualization.
+95. `NoiseGen(std)`: Injects Gaussian noise to improve model robustness.
+96. `AvgEnergy()`: Estimates the computational cost or power usage of the neuron.
+97. `EnableGPU()`: Offloads mathematical operations to NVIDIA CUDA kernels.
+98. `SharedMem()`: Configures neurons to share a memory space for weights.
+99. `UnitTests()`: Runs a suite of internal tests to ensure functional integrity.
+100. `Benchmark()`: Measures the time taken to process 1,000,000 signals.
 
 Prototype Lib
 --------------
