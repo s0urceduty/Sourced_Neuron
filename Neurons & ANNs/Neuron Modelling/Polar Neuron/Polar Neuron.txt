@@ -1,0 +1,18 @@
+Polar Neuron
+
+A new neural model made of competing polar subneuron modules within a single neuron using opposing activation patterns.
+
+The Polar Neuron is a model of competing polar subneuron modules within a single neuron using opposing activation patterns.
+
+The core concept behind the Polar Neuron lies in its ability to simultaneously process and integrate information from multiple sources through independent yet interconnected subneurons. Each of these polar subneurons is designed as an autonomous unit capable of performing localized computations, similar to biological neurons. However, instead of relying on a single output signal, each subneuron generates two distinct activation patterns: one representing the "positive" or excitatory state and another for the "negative" or inhibitory state. These opposing activations are then compared within the neuron's decision-making mechanism, resulting in an overall balanced response that integrates both positive and negative influences.
+
+Mathematical equations for Polar Neuron:
+
+1) The activation function f(x) used by each subneuron 
+2) The weights w_ij between pairs of neurons i and j in different layers or modules  
+3) The output g(z) from the decision mechanism that combines outputs z_i from all polar subneurons
+
+Polar Neuron incorporates a nested architecture where each polar subneuron is itself composed of multiple competing units. This hierarchical structure allows for more granular control over information processing at different levels within the network. The top-level decision mechanism compares the outputs from these lower-level subneurons to determine the final activation state of the entire neuron, effectively weighing and integrating both positive and negative influences across all available channels.
+
+The introduction of competing polar subneuron modules in a single artificial neuron opens up exciting possibilities for improving computational efficiency and robustness in neural networks. By enabling parallel processing through independent yet interconnected units, Polar Neuron can potentially handle more complex tasks with reduced latency compared to traditional architectures. Additionally, the nested competitive structure allows for finer-grained control over information flow within the network, leading to improved generalization capabilities and resistance to noise or adversarial attacks. As research progresses in this area, we may see widespread adoption of Polar Neuron models as a key component in next-generation artificial neural networks capable of tackling increasingly challenging real-world problems across various domains.
+
